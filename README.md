@@ -13,7 +13,7 @@ Vim/Neovimを初めて使う人向けの、軽めのIDEライクなNeovim設定�
 - `toggleterm.nvim` の内蔵ターミナル
 - Neovim組み込みLSP + `mason.nvim`
 - `blink.cmp` の補完
-- `nvim-treesitter` の構文ハイライト
+- Neovim組み込みTreesitterの構文ハイライト
 - `conform.nvim` のフォーマット
 - `nvim-lint` のlint
 - `gitsigns.nvim` のGit差分表示
@@ -30,7 +30,7 @@ Vim/Neovimを初めて使う人向けの、軽めのIDEライクなNeovim設定�
 - unzip, curl or wget
 - Nerd Font
 
-必要なLSP/formatter/parserは `mason.nvim` と `nvim-treesitter` で管理します。
+必要なLSP/formatterは `mason.nvim` で管理します。TreesitterはNeovim組み込み機能を使い、同梱parserがあるfiletypeだけ自動で有効化します。
 
 ## Installation
 
@@ -44,10 +44,9 @@ nvim
 ```vim
 :Lazy sync
 :MasonToolsInstallSync
-:TSInstall vim vimdoc query lua javascript typescript tsx json markdown markdown_inline html css bash
 ```
 
-`mason-tool-installer` は初回起動時に不足ツールをインストールします。手動で確実に完了を待ちたい場合は `:MasonToolsInstallSync` を使ってください。`nvim-treesitter` は、Neovim標準ftpluginが初期状態で要求しやすい `lua` / `vimdoc` / `query` parser だけを、`tree-sitter-cli` が利用可能になった後で補完します。その他のparserは上記の `:TSInstall ...` で明示的に入れてください。
+`mason-lspconfig` は `ensure_installed` に列挙したLSP serverを通常起動時にインストールし、インストール済みserverを `vim.lsp.enable()` で有効化します。`mason-tool-installer` は formatter/linter を初回起動時に不足分だけインストールします。手動で確実に完了を待ちたい場合は `:MasonToolsInstallSync` を使ってください。
 
 ## Keymaps
 
@@ -133,13 +132,14 @@ ftplugin/
 ## Notes
 
 - `nvim-lspconfig` は使わず、Neovim 0.11+ の `vim.lsp.config` / `vim.lsp.enable` を使います。
+- `nvim-treesitter` は使わず、Neovim組み込みの `vim.treesitter.start()` を使います。
 - `=` はVim標準のインデント操作として残し、formatは `<leader>f` にしています。
 - Git差分の左端表示は `gitsigns.nvim` が担当します。
 - 上部のtabはVimのtabpageではなくbuffer一覧です。`gt` / `gT` はVim標準のtabpage移動として残しています。
 
 ## Troubleshooting
 
-Luaファイルを開いた時に `Parser could not be created ... language "lua"` が出る場合は、Treesitter parser が未インストールです。先に `:MasonToolsInstall` で `tree-sitter-cli` を入れてから、Installation の `:TSInstall ...` を再実行してください。
+Luaファイルを開いた時に `Parser could not be created ... language "lua"` が出る場合は、Neovim本体に同梱されるparserが見えていない可能性があります。まず `:checkhealth vim.treesitter` と `:messages` を確認してください。通常のNeovim 0.11+ packageでは Lua / Vimdoc / Markdown などの基本parserは本体に同梱されています。
 
 ## License
 

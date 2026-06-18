@@ -19,7 +19,7 @@ return {
 		},
 	},
 
-	-- Mason ↔ LSP 連携（ensure_installed のみ使用）
+	-- Mason ↔ LSP 連携
 	{
 		"williamboman/mason-lspconfig.nvim",
 		lazy = false,
@@ -36,12 +36,13 @@ return {
 				"emmet_ls",
 				"jsonls",
 			},
-			-- LSPの自動セットアップは使わない（vim.lsp.config で管理）
-			automatic_installation = false,
+			-- mason-lspconfig v2 では automatic_installation は廃止。
+			-- ensure_installed で導入し、vim.lsp.enable() は automatic_enable に任せる。
+			automatic_enable = true,
 		},
 	},
 
-	-- フォーマッタ・リンターと parser ビルド用CLIのインストール
+	-- フォーマッタ・リンターのインストール
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		lazy = false,
@@ -50,8 +51,6 @@ return {
 		},
 		opts = {
 			ensure_installed = {
-				-- パーサービルド
-				"tree-sitter-cli", -- nvim-treesitter(main) の parser ビルドに必須
 				-- フォーマッタ
 				"stylua", -- Lua (conform.nvim)
 				"biome", -- JS/TS/JSON (conform.nvim + nvim-lint)
