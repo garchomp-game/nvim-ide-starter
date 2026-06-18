@@ -36,7 +36,7 @@ Vim/Neovimを初めて使う人向けの、軽めのIDEライクなNeovim設定�
 ## Installation
 
 ```sh
-git clone <this-repository-url> ~/.config/nvim
+git clone https://github.com/garchomp-game/nvim-ide-starter.git ~/.config/nvim
 nvim
 ```
 
