@@ -43,11 +43,11 @@ nvim
 
 ```vim
 :Lazy sync
-:MasonToolsInstall
-:TSInstall vim vimdoc lua javascript typescript tsx json markdown markdown_inline html css bash
+:MasonToolsInstallSync
+:TSInstall vim vimdoc query lua javascript typescript tsx json markdown markdown_inline html css bash
 ```
 
-`mason-tool-installer` と `nvim-treesitter` の起動時自動インストールは無効にしています。起動や終了時に裏でインストールが走って固まったように見えるのを避けるためです。
+`mason-tool-installer` は初回起動時に不足ツールをインストールします。手動で確実に完了を待ちたい場合は `:MasonToolsInstallSync` を使ってください。`nvim-treesitter` は、Neovim標準ftpluginが初期状態で要求しやすい `lua` / `vimdoc` / `query` parser だけを、`tree-sitter-cli` が利用可能になった後で補完します。その他のparserは上記の `:TSInstall ...` で明示的に入れてください。
 
 ## Keymaps
 

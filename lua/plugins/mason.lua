@@ -1,6 +1,6 @@
 -- mason.lua: Mason による開発ツールの一元管理
 -- LSP設定は ~/.config/nvim/lsp/ + vim.lsp.config で管理
--- フォーマッタ・リンターは mason-tool-installer で手動インストール
+-- フォーマッタ・リンターは mason-tool-installer で不足分をインストール
 
 return {
 	-- Mason 本体
@@ -41,7 +41,7 @@ return {
 		},
 	},
 
-	-- フォーマッタ・リンターの手動インストール
+	-- フォーマッタ・リンターと parser ビルド用CLIのインストール
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		lazy = false,
@@ -58,7 +58,7 @@ return {
 				"prettier", -- CSS/HTML/Markdown (conform.nvim)
 			},
 			auto_update = false,
-			run_on_start = false,
+			run_on_start = true,
 		},
 	},
 }
