@@ -27,6 +27,7 @@ if vim.treesitter and vim.treesitter.start and not vim.g.nvim_ide_starter_ts_sta
 end
 
 local utils = require("utils")
+local config_root = vim.fs.dirname(debug.getinfo(1, "S").source:gsub("^@", ""))
 local data = vim.fn.stdpath("data")
 local lazypath = data .. "/lazy/lazy.nvim"
 
@@ -68,8 +69,8 @@ local configs = {
 	performance = {
 		rtp = {
 			-- lazy.nvim の runtimepath reset 後も、Neovim package が同梱する
-			-- Treesitter parser path は残す。
-			paths = bundled_parser_paths(),
+			-- Treesitter parser path と現在の設定rootは残す。
+			paths = vim.list_extend({ config_root }, bundled_parser_paths()),
 		},
 	},
 }

@@ -47,7 +47,7 @@ nvim
 :MasonToolsInstallSync
 ```
 
-`mason-lspconfig` は `ensure_installed` に列挙したLSP serverを通常起動時にインストールし、インストール済みserverを `vim.lsp.enable()` で有効化します。`mason-tool-installer` は formatter/linter を初回起動時に不足分だけインストールします。手動で確実に完了を待ちたい場合は `:MasonToolsInstallSync` を使ってください。
+`mason-lspconfig` は `lsp/*.lua` にあるLSP serverを通常起動時にインストールし、インストール済みserverを `vim.lsp.enable()` で有効化します。`mason-tool-installer` は formatter/linter を初回起動時に不足分だけインストールします。手動で確実に完了を待ちたい場合は `:MasonToolsInstallSync` を使ってください。
 
 ## Keymaps
 
@@ -213,6 +213,8 @@ lua/
     init.lua
     mappings.lua
     option.lua
+    diagnostic.lua
+    lsp.lua
     command.lua
     autocmd.lua
   plugins/
@@ -226,6 +228,7 @@ ftplugin/
 ## Notes
 
 - `nvim-lspconfig` は使わず、Neovim 0.11+ の `vim.lsp.config` / `vim.lsp.enable` を使います。
+- `lsp/*.lua` のファイル名が Mason の自動インストール対象になります。Mason管理外のserverを追加したい場合は `lua/config/lsp.lua` を調整してください。
 - `nvim-treesitter` は使わず、Neovim組み込みの `vim.treesitter.start()` を使います。
 - `=` はVim標準のインデント操作として残し、formatは `<leader>f` にしています。
 - Git差分の左端表示は `gitsigns.nvim` が担当します。

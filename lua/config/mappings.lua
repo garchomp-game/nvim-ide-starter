@@ -39,29 +39,3 @@ end, opts)
 vim.keymap.set("n", "<leader>cp", function()
 	vim.diagnostic.goto_prev()
 end, opts)
-
--- LSPアタッチ時のキーマップ設定
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
-	callback = function(ev)
-		local opts_with_buf = function(desc)
-			return { buffer = ev.buf, noremap = true, silent = true, desc = desc }
-		end
-		-- 定義ジャンプ
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts_with_buf("定義へジャンプ"))
-		-- 宣言ジャンプ
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts_with_buf("宣言へジャンプ"))
-		-- 型定義ジャンプ
-		vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts_with_buf("型定義へジャンプ"))
-		-- 実装へジャンプ
-		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts_with_buf("実装へジャンプ"))
-		-- 参照一覧
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts_with_buf("参照一覧"))
-		-- リネーム
-		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts_with_buf("リネーム"))
-		-- コードアクション
-		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts_with_buf("コードアクション"))
-		-- ホバー情報
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts_with_buf("ホバー情報"))
-	end,
-})

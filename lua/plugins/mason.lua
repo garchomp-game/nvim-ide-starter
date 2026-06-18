@@ -1,5 +1,5 @@
 -- mason.lua: Mason による開発ツールの一元管理
--- LSP設定は ~/.config/nvim/lsp/ + vim.lsp.config で管理
+-- LSP server一覧と共通設定は lua/config/lsp.lua で管理
 -- フォーマッタ・リンターは mason-tool-installer で不足分をインストール
 
 return {
@@ -29,20 +29,18 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 		},
-		opts = {
-			ensure_installed = {
-				"lua_ls",
-				"ts_ls",
-				"html",
-				"cssls",
-				"bashls",
-				"emmet_ls",
-				"jsonls",
-			},
-			-- mason-lspconfig v2 では automatic_installation は廃止。
-			-- ensure_installed で導入し、vim.lsp.enable() は automatic_enable に任せる。
-			automatic_enable = true,
-		},
+		opts = function()
+			return {
+				ensure_installed = require("config.lsp").server_names(),
+				-- mason-lspconfig v2 では automatic_installation は廃止。
+				-- ensure_installed で導入し、vim.lsp.enable() は automatic_enable に任せる。
+				automatic_enable = true,
+			}
+		end,
+		config = function(_, opts)
+			require("config.lsp").setup()
+			require("mason-lspconfig").setup(opts)
+		end,
 	},
 
 	-- フォーマッタ・リンターのインストール
