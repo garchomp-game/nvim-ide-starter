@@ -7,6 +7,9 @@ return {
 	{
 		"williamboman/mason.nvim",
 		lazy = false,
+		keys = {
+			{ "<leader>pm", "<cmd>Mason<cr>", desc = "Masonを開く" },
+		},
 		opts = {
 			ui = {
 				border = "rounded",
@@ -48,6 +51,9 @@ return {
 		lazy = false,
 		dependencies = {
 			"williamboman/mason.nvim",
+		},
+		keys = {
+			{ "<leader>pM", "<cmd>MasonToolsInstallSync<cr>", desc = "Mason toolsを同期" },
 		},
 		opts = {
 			ensure_installed = {

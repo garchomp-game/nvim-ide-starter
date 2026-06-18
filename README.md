@@ -52,22 +52,71 @@ nvim
 
 Leader keyは `<Space>` です。
 
+プラグイン由来の主要操作は、基本的に `<leader>` からも実行できます。Neo-tree内では `<Space>` 単体のノード開閉を無効化し、leader prefixとして使いやすくしています。ノードを開く/閉じる時は `<CR>` を使ってください。
+
+File tree:
+
 | Key | Action |
 |---|---|
 | `<C-n>` | ファイルツリーを開閉 |
-| `<leader>e` | 現在のファイルをファイルツリーで表示 |
+| `<leader>e` | ファイルツリーを開閉 |
+| `<leader>E` | 現在のファイルをファイルツリーで表示 |
+| `<leader>o` | ファイルツリーへ移動 |
+| `<leader>be` | bufferツリーを開閉 |
+| `<leader>ge` | Git statusツリーを開閉 |
+
+Buffers:
+
+| Key | Action |
+|---|---|
 | `<Tab>` | 次のbufferへ |
 | `<S-Tab>` | 前のbufferへ |
+| `<leader>bn` | 次のbufferへ |
+| `<leader>bp` | 前のbufferへ |
+| `<leader>bf` | bufferを選択 |
 | `<leader>bd` | 現在のbufferを閉じる |
+| `<leader>bD` | 他のbufferを閉じる |
+
+Find:
+
+| Key | Action |
+|---|---|
 | `<leader>ff` | ファイル検索 |
 | `<leader>fg` | 全文検索 |
 | `<leader>fb` | buffer検索 |
 | `<leader>fh` | help検索 |
+| `<leader>fr` | 最近のファイル |
+| `<leader>fw` | カーソル下の単語を検索 |
+| `<leader>f/` | 現在buffer内を検索 |
+| `<leader>fk` | キーマップ検索 |
+| `<leader>fc` | コマンド検索 |
+| `<leader>fd` | 診断検索 |
+
+Terminal:
+
+| Key | Action |
+|---|---|
 | `<C-\>` | ターミナルを開閉 |
 | `<leader>vt` | vertical terminal |
+| `<leader>tt` | ターミナルを開閉 |
+| `<leader>th` | 水平ターミナルを開閉 |
+| `<leader>tv` | 垂直ターミナルを開閉 |
+| `<leader>tf` | フロートターミナルを開閉 |
+| `<leader>ta` | 全ターミナルを開閉 |
+
+ターミナル内で閉じる時は、`<Esc>` でterminal-normal modeに抜けてから同じ `<leader>t...` を使います。
+
+Code / diagnostics:
+
+| Key | Action |
+|---|---|
 | `<leader>f` | format |
+| `<leader>cf` | format |
+| `<leader>cl` | lint |
 | `<leader>xx` | 診断一覧 |
 | `<leader>xX` | 現在bufferの診断一覧 |
+| `<leader>xl` | location listをTroubleで表示 |
+| `<leader>xq` | quickfixをTroubleで表示 |
 | `gd` | 定義へ移動 |
 | `gD` | 宣言へ移動 |
 | `gi` | 実装へ移動 |
@@ -75,6 +124,48 @@ Leader keyは `<Space>` です。
 | `K` | hover |
 | `<leader>rn` | rename |
 | `<leader>ca` | code action |
+
+Git:
+
+| Key | Action |
+|---|---|
+| `<leader>gc` | commit検索 |
+| `<leader>gC` | 現在bufferのcommit検索 |
+| `<leader>gf` | Git管理ファイル検索 |
+| `<leader>gS` | Git status検索 |
+| `<leader>gn` | 次のGit hunkへ |
+| `<leader>gp` | 前のGit hunkへ |
+| `<leader>gh` | Git hunkをプレビュー |
+| `<leader>gH` | Git hunkをインライン表示 |
+| `<leader>gs` | Git hunkをstage |
+| `<leader>gr` | Git hunkを戻す |
+| `<leader>gu` | stageを取り消す |
+| `<leader>gb` | 行のblameを表示 |
+| `<leader>gB` | 行blameを切替 |
+| `<leader>gd` | Git diffを表示 |
+| `<leader>gD` | 前commitとの差分 |
+| `<leader>gw` | 単語差分を切替 |
+| `<leader>gq` | Git hunkをquickfixへ |
+
+Plugin/tools:
+
+| Key | Action |
+|---|---|
+| `<leader>?` | キーマップを表示 |
+| `<leader>pl` | Lazyを開く |
+| `<leader>ps` | pluginを同期 |
+| `<leader>pu` | pluginを更新 |
+| `<leader>pm` | Masonを開く |
+| `<leader>pM` | Mason toolsを同期 |
+
+Words:
+
+| Key | Action |
+|---|---|
+| `]]` | 次の参照へ |
+| `[[` | 前の参照へ |
+| `<leader>wn` | 次の参照へ |
+| `<leader>wp` | 前の参照へ |
 
 Window移動:
 

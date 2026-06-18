@@ -9,54 +9,59 @@ vim.keymap.set("n", "<c-l>", "<c-w>l") -- ctrl + l で右のウィンドウに�
 
 -- ノーマルモードで <leader> + vt で垂直ターミナルを開く
 vim.keymap.set("n", "<leader>vt", function()
-  require("utils").VertTerm()
+	require("utils").VertTerm()
 end, opts)
 
+-- Plugin/tool管理
+vim.keymap.set("n", "<leader>pl", "<cmd>Lazy<cr>", { noremap = true, silent = true, desc = "Lazyを開く" })
+vim.keymap.set("n", "<leader>ps", "<cmd>Lazy sync<cr>", { noremap = true, silent = true, desc = "pluginを同期" })
+vim.keymap.set("n", "<leader>pu", "<cmd>Lazy update<cr>", { noremap = true, silent = true, desc = "pluginを更新" })
+
 -- ロケーションリストを開く/閉じる
-vim.keymap.set('n', '<leader>lo', "<cmd>lopen<cr>", opts)  -- <leader> + lo でロケーションリストを開く
-vim.keymap.set('n', '<leader>lc', "<cmd>lclose<cr>", opts) -- <leader> + lc でロケーションリストを閉じる
+vim.keymap.set("n", "<leader>lo", "<cmd>lopen<cr>", opts) -- <leader> + lo でロケーションリストを開く
+vim.keymap.set("n", "<leader>lc", "<cmd>lclose<cr>", opts) -- <leader> + lc でロケーションリストを閉じる
 
 -- クイックフィックスリストを開く/閉じる
-vim.keymap.set('n', '<leader>co', "<cmd>copen<cr>", opts)  -- <leader> + co でクイックフィックスリストを開く
-vim.keymap.set('n', '<leader>cc', "<cmd>cclose<cr>", opts) -- <leader> + cc でクイックフィックスリストを閉じる
+vim.keymap.set("n", "<leader>co", "<cmd>copen<cr>", opts) -- <leader> + co でクイックフィックスリストを開く
+vim.keymap.set("n", "<leader>cc", "<cmd>cclose<cr>", opts) -- <leader> + cc でクイックフィックスリストを閉じる
 
 -- クイックフィックスリストに診断情報を設定
-vim.keymap.set('n', '<leader>cq', function()
-  vim.diagnostic.setqflist()
+vim.keymap.set("n", "<leader>cq", function()
+	vim.diagnostic.setqflist()
 end, opts)
 
 -- 次の診断に移動
-vim.keymap.set('n', '<leader>cn', function()
-  vim.diagnostic.goto_next()
+vim.keymap.set("n", "<leader>cn", function()
+	vim.diagnostic.goto_next()
 end, opts)
 
 -- 前の診断に移動
-vim.keymap.set('n', '<leader>cp', function()
-  vim.diagnostic.goto_prev()
+vim.keymap.set("n", "<leader>cp", function()
+	vim.diagnostic.goto_prev()
 end, opts)
 
 -- LSPアタッチ時のキーマップ設定
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', { clear = true }),
-  callback = function(ev)
-    local opts_with_buf = function(desc)
-      return { buffer = ev.buf, noremap = true, silent = true, desc = desc }
-    end
-    -- 定義ジャンプ
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts_with_buf('定義へジャンプ'))
-    -- 宣言ジャンプ
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts_with_buf('宣言へジャンプ'))
-    -- 型定義ジャンプ
-    vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, opts_with_buf('型定義へジャンプ'))
-    -- 実装へジャンプ
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts_with_buf('実装へジャンプ'))
-    -- 参照一覧
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts_with_buf('参照一覧'))
-    -- リネーム
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts_with_buf('リネーム'))
-    -- コードアクション
-    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts_with_buf('コードアクション'))
-    -- ホバー情報
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts_with_buf('ホバー情報'))
-  end,
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
+	callback = function(ev)
+		local opts_with_buf = function(desc)
+			return { buffer = ev.buf, noremap = true, silent = true, desc = desc }
+		end
+		-- 定義ジャンプ
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts_with_buf("定義へジャンプ"))
+		-- 宣言ジャンプ
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts_with_buf("宣言へジャンプ"))
+		-- 型定義ジャンプ
+		vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts_with_buf("型定義へジャンプ"))
+		-- 実装へジャンプ
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts_with_buf("実装へジャンプ"))
+		-- 参照一覧
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts_with_buf("参照一覧"))
+		-- リネーム
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts_with_buf("リネーム"))
+		-- コードアクション
+		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts_with_buf("コードアクション"))
+		-- ホバー情報
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts_with_buf("ホバー情報"))
+	end,
 })
