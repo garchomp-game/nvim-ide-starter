@@ -8,6 +8,7 @@ Vim/Neovimを初めて使う人向けの、軽めのIDEライクなNeovim設定�
 
 - `lazy.nvim` によるプラグイン管理
 - `neo-tree.nvim` のサイドバー
+- `activitybar.nvim` によるクリック可能なランチャー
 - `bufferline.nvim` のbuffer tab
 - `telescope.nvim` のファイル検索/全文検索
 - `toggleterm.nvim` の内蔵ターミナル
@@ -155,6 +156,8 @@ Plugin/tools:
 | `<leader>pl` | Lazyを開く |
 | `<leader>ps` | pluginを同期 |
 | `<leader>pu` | pluginを更新 |
+| `<leader>pa` | ActivityBarを開閉 |
+| `<leader>pA` | ActivityBarの左右を切替 |
 | `<leader>pm` | Masonを開く |
 | `<leader>pM` | Mason toolsを同期 |
 
@@ -227,6 +230,28 @@ ftplugin/
 - `=` はVim標準のインデント操作として残し、formatは `<leader>f` にしています。
 - Git差分の左端表示は `gitsigns.nvim` が担当します。
 - 上部のtabはVimのtabpageではなくbuffer一覧です。`gt` / `gT` はVim標準のtabpage移動として残しています。
+- `activitybar.nvim` は `garchomp-game/activitybar.nvim` の `v0.1.0` タグを読み込みます。
+- ActivityBarはデフォルト左端固定です。`<leader>pA` で左右を切り替えられます。
+- Neo-treeなどのpanelを開いた場合は、ActivityBarを端へ同期的に再配置してちらつきを抑えます。
+- ActivityBarの薄いgray背景は、各itemの `active` 関数で制御しています。toggleではない項目には `active` を付けていません。
+
+### ActivityBarをAIで設定する時の考え方
+
+ActivityBarは補助UIです。プラグイン本体にNeo-treeやTelescope専用処理を持たせず、各itemの設定で連携します。AIに設定を頼む時は、以下を伝えると調整しやすいです。
+
+```text
+activitybar.nvimのitemを追加したいです。
+
+実行したいコマンド: <cmd>...
+表示したいアイコン: ...
+これは開閉式のUIですか: yes/no
+開いているか判定できるfiletypeやbuffer変数: ...
+Telescopeのようにpromptへfocusが必要ですか: yes/no
+
+既存のitems配列に追加できるLua tableを返してください。
+```
+
+Telescopeのようなfloating pickerは、ActivityBar側の再配置処理でfocusを奪わないように `post_action = false` と `focus_filetype = "TelescopePrompt"` を指定します。Neo-treeのような開閉式UIは、visible windowを見て `active` を返す関数を付けます。
 
 ## Troubleshooting
 

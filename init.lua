@@ -63,7 +63,7 @@ local configs = {
 	defaults = { lazy = true },
 	rocks = { enabled = false }, -- luarocks 不要（使うプラグインなし）
 	dev = {
-		path = vim.env.DEV_PLUGIN_PATH,
+		path = vim.env.DEV_PLUGIN_PATH or vim.fn.expand("~/workspace"),
 	},
 	performance = {
 		rtp = {
