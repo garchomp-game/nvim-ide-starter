@@ -3,7 +3,6 @@ return {
 	"folke/snacks.nvim",
 	lazy = false,
 	priority = 1000,
-	---@type snacks.Config
 	opts = {
 		-- 右上の通知ポップアップは、初心者向けcoreでは無効にする。
 		-- 有効化したい場合は true に変更する。
@@ -23,7 +22,7 @@ return {
 		{
 			"]]",
 			function()
-				Snacks.words.jump(vim.v.count1)
+				require("snacks").words.jump(vim.v.count1)
 			end,
 			desc = "次の参照",
 			mode = { "n", "t" },
@@ -31,7 +30,7 @@ return {
 		{
 			"[[",
 			function()
-				Snacks.words.jump(-vim.v.count1)
+				require("snacks").words.jump(-vim.v.count1)
 			end,
 			desc = "前の参照",
 			mode = { "n", "t" },
@@ -39,14 +38,14 @@ return {
 		{
 			"<leader>wn",
 			function()
-				Snacks.words.jump(vim.v.count1)
+				require("snacks").words.jump(vim.v.count1)
 			end,
 			desc = "次の参照",
 		},
 		{
 			"<leader>wp",
 			function()
-				Snacks.words.jump(-vim.v.count1)
+				require("snacks").words.jump(-vim.v.count1)
 			end,
 			desc = "前の参照",
 		},

@@ -16,7 +16,7 @@ end
 
 return {
 	"garchomp-game/activitybar.nvim",
-	tag = "v0.1.0",
+	tag = "v0.1.1",
 	lazy = false,
 	dependencies = {
 		"MunifTanjim/nui.nvim",

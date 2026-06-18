@@ -230,7 +230,7 @@ ftplugin/
 - `=` はVim標準のインデント操作として残し、formatは `<leader>f` にしています。
 - Git差分の左端表示は `gitsigns.nvim` が担当します。
 - 上部のtabはVimのtabpageではなくbuffer一覧です。`gt` / `gT` はVim標準のtabpage移動として残しています。
-- `activitybar.nvim` は `garchomp-game/activitybar.nvim` の `v0.1.0` タグを読み込みます。
+- `activitybar.nvim` は `garchomp-game/activitybar.nvim` の `v0.1.1` タグを読み込みます。
 - ActivityBarはデフォルト左端固定です。`<leader>pA` で左右を切り替えられます。
 - Neo-treeなどのpanelを開いた場合は、ActivityBarを端へ同期的に再配置してちらつきを抑えます。
 - ActivityBarの薄いgray背景は、各itemの `active` 関数で制御しています。toggleではない項目には `active` を付けていません。
