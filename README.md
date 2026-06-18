@@ -99,6 +99,18 @@ Window移動:
 
 Java、PHP、DAP、Neogit、Markdown preview、PlantUMLなどはcoreから外しています。必要ならplugin specとLSP設定を追加してください。
 
+## Optional UI
+
+右上に出る通知ポップアップはcoreでは無効にしています。エラー表示や `:messages` / `:CopyMessage` の確認を邪魔しやすいためです。
+
+`snacks.nvim` の通知UIを使いたい場合は [lua/plugins/snacks.lua](lua/plugins/snacks.lua) の以下を変更します。
+
+```lua
+notifier = { enabled = true }
+```
+
+LSPの進捗表示が欲しい場合は、optional pluginとして `j-hui/fidget.nvim` を追加してください。
+
 ## Project Structure
 
 ```text
@@ -124,6 +136,10 @@ ftplugin/
 - `=` はVim標準のインデント操作として残し、formatは `<leader>f` にしています。
 - Git差分の左端表示は `gitsigns.nvim` が担当します。
 - 上部のtabはVimのtabpageではなくbuffer一覧です。`gt` / `gT` はVim標準のtabpage移動として残しています。
+
+## Troubleshooting
+
+Luaファイルを開いた時に `Parser could not be created ... language "lua"` が出る場合は、Treesitter parser が未インストールです。先に `:MasonToolsInstall` で `tree-sitter-cli` を入れてから、Installation の `:TSInstall ...` を再実行してください。
 
 ## License
 

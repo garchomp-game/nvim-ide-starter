@@ -1,13 +1,13 @@
 -- snacks.nvim: Folke の統合ユーティリティ
--- nvim-notify, vim-illuminate, indent-blankline を統合
 return {
   'folke/snacks.nvim',
   lazy = false,
   priority = 1000,
   ---@type snacks.Config
   opts = {
-    -- 通知システム（nvim-notify の代替）
-    notifier = { enabled = true },
+    -- 右上の通知ポップアップは、初心者向けcoreでは無効にする。
+    -- 有効化したい場合は true に変更する。
+    notifier = { enabled = false },
     -- 大きなファイルの高速表示
     quickfile = { enabled = true },
     -- 初心者向けには標準のsign/number列を保つ
